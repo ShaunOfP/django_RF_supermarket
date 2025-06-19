@@ -69,37 +69,17 @@ class ProductsDetailSerializer(serializers.Serializer):
     name = serializers.CharField(max_length=255)
     description = serializers.CharField()
     price = serializers.DecimalField(max_digits=50, decimal_places=2)
-    market = MarketSerializer(many=True, read_only=True)
-    seller = SellersDetailSerializer(many=True, read_only=True)
+    market = MarketSerializer(many=False, read_only=True)
+    seller = SellersDetailSerializer(many=False, read_only=True)
 
 
 class ProductsCreateSerializer(serializers.Serializer):
     name = serializers.CharField(max_length=255)
     description = serializers.CharField()
     price = serializers.DecimalField(max_digits=50, decimal_places=2)
-    market = serializers.IntegerField()
-    seller = serializers.IntegerField()
-
-    def validate_market(self, value):
-        try:
-            market = Market.objects.get(id=value)
-        except Market.DoesNotExist:
-            raise serializers.ValidationError("Market with this ID does not exist")
-        self._validated_market = market
-        return value
-
-    def validate_seller(self, value):
-        try:
-            seller = Seller.objects.get(id=value)
-        except Seller.DoesNotExist:
-            raise serializers.ValidationError("Seller with this ID does not exist")
-        self._validated_seller = seller
-        return value
+    market = serializers.PrimaryKeyRelatedField(queryset=Market.objects.all())
+    seller = serializers.PrimaryKeyRelatedField(queryset=Seller.objects.all())
 
     def create(self, validated_data):
-        validated_data.pop('market')
-        validated_data.pop('seller')
-        product = Product.objects.create(**validated_data, market=self._validated_market, seller=self._validated_seller)
-        # product.market.set(market)
-        # product.seller.set(seller)
+        product = Product.objects.create(**validated_data)
         return product
