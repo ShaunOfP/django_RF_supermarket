@@ -71,24 +71,3 @@ class ProductSerializer(serializers.ModelSerializer):
         model = Product
         fields = ['id', 'name', 'description', 'price',
                   'market', 'market_id', 'seller', 'seller_id']
-
-
-# class ProductsDetailSerializer(serializers.Serializer):
-#     id = serializers.IntegerField(read_only=True)
-#     name = serializers.CharField(max_length=255)
-#     description = serializers.CharField()
-#     price = serializers.DecimalField(max_digits=50, decimal_places=2)
-#     market = MarketSerializer(many=False, read_only=True)
-#     seller = SellersDetailSerializer(many=False, read_only=True)
-
-
-# class ProductsCreateSerializer(serializers.Serializer):
-#     name = serializers.CharField(max_length=255)
-#     description = serializers.CharField()
-#     price = serializers.DecimalField(max_digits=50, decimal_places=2)
-#     market = serializers.PrimaryKeyRelatedField(queryset=Market.objects.all())
-#     seller = serializers.PrimaryKeyRelatedField(queryset=Seller.objects.all())
-
-#     def create(self, validated_data):
-#         product = Product.objects.create(**validated_data)
-#         return product
