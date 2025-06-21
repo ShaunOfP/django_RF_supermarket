@@ -1,5 +1,5 @@
 from rest_framework.response import Response
-from .serializers import MarketSerializer, SellerSerializer, ProductSerializer
+from .serializers import MarketSerializer, SellerSerializer, ProductSerializer, SellerListSerializer
 from market_app.models import Market, Seller, Product
 from rest_framework.views import APIView
 from rest_framework import mixins
@@ -17,7 +17,7 @@ class MarketSingleView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class SellerOfMarketList(generics.ListAPIView):
-    serializer_class = SellerSerializer
+    serializer_class = SellerListSerializer
 
     def get_queryset(self):
         pk = self.kwargs.get('pk')

@@ -3,9 +3,9 @@ from .views import MarketsView, MarketSingleView, SellerOfMarketList, SellersVie
 
 urlpatterns = [
     path('market/', MarketsView.as_view()),
-    path('market/<int:pk>/', MarketSingleView.as_view(), name="market-detail"),
+    path('market/<int:pk>/', MarketSingleView.as_view(), name='market-detail'),
     path('market/<int:pk>/sellers/', SellerOfMarketList.as_view()),
     path('seller/', SellersView.as_view()),
-    path('seller/<int:pk>/', SellerSingleView.as_view(), name='seller_single'),
+    path('seller/<int:pk>/', SellerSingleView.as_view(), name='seller-detail'),
     path('product/', ProductsView.as_view())
 ]
