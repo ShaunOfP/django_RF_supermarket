@@ -66,12 +66,12 @@ class SellerListSerializer(SellerSerializer, serializers.HyperlinkedModelSeriali
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    market = MarketSerializer(many=False, read_only=True)
-    market_id = serializers.PrimaryKeyRelatedField(
-        queryset=Market.objects.all(), many=False, write_only=True, source='market')
-    seller = SellerSerializer(many=False, read_only=True)
-    seller_id = serializers.PrimaryKeyRelatedField(
-        queryset=Seller.objects.all(), many=False, write_only=True, source='seller')
+    # market = MarketSerializer(many=False, read_only=True)
+    # market_id = serializers.PrimaryKeyRelatedField(
+    #     queryset=Market.objects.all(), many=False, write_only=True, source='market')
+    # seller = SellerSerializer(many=False, read_only=True)
+    # seller_id = serializers.PrimaryKeyRelatedField(
+    #     queryset=Seller.objects.all(), many=False, write_only=True, source='seller')
 
     class Meta:
         model = Product
